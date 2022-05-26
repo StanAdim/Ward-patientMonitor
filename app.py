@@ -12,15 +12,18 @@ app = Flask(__name__)
 #-----------SQL LITE CONNECTION
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///wardsys.db'
+
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://kiyjxcfsojujet:9ddc7c2f5ab88dbb0a764e34f1d54561020d36463e8985215fe6ec02a1ee05a9@ec2-52-204-195-41.compute-1.amazonaws.com:5432/d16vlocu92l8pg'
 #----------- MYSQL  CONNECTION
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/ward_patient'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/ward_patient'
 
 
 ###################### ----DATABASE CONFIGURATIONS -----#################
 db = SQLAlchemy(app)
 class Patient (db.Model):
-        id = db.Column(db.Integer, primary_key = True)
+        id = db.Column(db.Integer, primary_key = True) 
         first_name = db.Column(db.String(50),nullable = False)
         last_name = db.Column(db.String(50),nullable = False)
         ward_name = db.Column(db.String(50),nullable = False)
