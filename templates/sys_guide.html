@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %} 
+     Patient List
+{% endblock %} 
+   
+{% block content %} 
+    <h1 class="Display-1">
+        System Guide And Instructions
+    </h1>
+<div class="container">
+    <div class="card row pt-2 pb-2">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                 Introduction
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <strong>What does This system DO</strong> 
+                  <br>
+                  The system is capable of enrolling admitted patient to the system and that allows immediate tracking 
+                  of the patients health status as soon as the have their temperature and heartrate sensors turned  on to them.To admit a patient 
+                  click here:  <a href="/add-patient-form" class="link bg bg-light"><code class="link-primary">Admit patient</code></a>. All necessary patients details will save
+                  to the hospital data polls. To view patient admited list click the link here: <a href="/patient-enrolled" class="bg bg-light"><code class="link-primary">Patient List</code></a>
+                  The tracking system of sensor nodes save both the patient temperature and heart rates to the database of patient respectively.
+                  <code>Report To Your supervise for any system misbehaviur</code>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Admitting Patient
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <strong>Enrolling the admitted Patient To Monitoring System.</strong>
+                  <hr>
+                  The system have the capacity to admit all the patient whom the system will be required to
+                  monitor. Healh caregiver will be responsible to add necessary detail of patient to the system.
+                  The necessary details are Patient first name , last name , admitted ward, bed number , 
+                  the health caregiver or Doctor who is in charge of a given patient. These information will 
+                  be saved to a Hospital medical data pool | Hospital database. These information can be 
+                  retrived at any regular basis.
+                  <code>No patient will be monitored under this sytem unless he/she is enrolled.></code>
+                  For enrolled patient the healhcare will have to trigger a monitoring button to enable data record of 
+                  of the given patient monitored.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Checking Patient Status
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <strong>The temperature and Heart Rate of Patient.</strong> 
+                  <hr>
+                        All the patient under monitoring system will have the table of their temperature and heart rate 
+                        record and Here is where the evaluation of general health condition of the patient will be summerized.
+                  <code>Artificial Intelligence</code>,  shall be responsible for data evaluation and Conclusion over the trending 
+                  progress of the patient in time
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Form
+{% endblock%}
+
+{% block content %}
+ <div class="container">
+     <div class="row">
+        <h1></h1>
+         <div class="col">
+          
+             <div class="row">
+               <div class="col">
+                <h3 class="h3">
+                  Register a Sensor Node
+               </h3>
+                <form action="/register-node" method="POST">
+
+           
+                  <div class="col">
+                   <div class="mb-3"> 
+                     <select id="inputState" class="form-select" name="ward_name">
+                       
+                           <option selected value="Nyerere">Nyerere ward</option>
+                           <option value="Mandela">Mandela ward</option>
+                           <option value="Mwinyi">Mwinyi ward</option>
+                           <option value="Mkapa">Mkapa ward</option>
+   
+                     </select>
+                   </div>
+                   <div class="mb-3">
+                     <input type="text" class="form-control" id="Bed_number" name="bed_number" placeholder="Bed Number">
+                   </div>
+                </div>
+   
+                
+                 </div>     
+                    
+                  
+                   
+                   <button type="submit" class="btn btn-secondary">Register Node</button>
+                 </form>
+               </div>
+               <div class="col">
+                <h3 class="h3">
+                  Registered Sensor Nodes
+               </h3>
+
+               <div class="container">
+                <ol class="list-group list-group-numbered">
+
+                  {%for node in nodeAvailable %}
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                      <div class="fw-bold">
+                        {{node.id}}-{{node.bed_number}}-{{node.ward_name}}
+                  </li>
+                                 
+                  {% endfor%}
+                </ol>
+               </div>
+                     
+               </div>
+
+             </div>
+            
+         </div>
+         
+     </div>
+ </div>
+{% endblock %}

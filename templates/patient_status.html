@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %} 
+     Patient List
+{% endblock %} 
+   
+{% block content %} 
+    <h1 class="Display-1">
+        Temperature and Heart rate Records
+    </h1>
+    <small class=" h4 text text-primary">{{patientInfo.first_name}} {{patientInfo.last_name}} Record</small>
+<div class="container">
+    <div class="row">
+        <table class="table table-striped">
+           
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Temperature <small class="text-secondary"> (C) </small></th>
+                  <th scope="col">Heart Rates <small class="text-secondary"> (BPM) </small></th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+
+
+                
+                  {% for record in healthRecords %}
+                  <tr>
+                  <th scope="row">{{record.id}}</th>
+                  <td>{{record.temperature}}</td>
+                  <td>{{record.heart_rate}}</td>
+                 
+                <!-- <td>....</td>  --> 
+                </tr>
+                  {% endfor %}
+                                
+             
+               
+              </tbody>
+          </table>
+    </div>
+</div>
+{% endblock %} 

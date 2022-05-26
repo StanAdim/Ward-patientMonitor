@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Form
+{% endblock%}
+
+{% block content %}
+ <div class="container">
+     <div class="row">
+        <h1></h1>
+         <div class="col">
+             <h3 class="h3">
+                Add the patient details
+             </h3>
+            <form action="/add-patient" method="POST">
+
+              <div class="row">
+                <div class="col">
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="firt_name" name="firt_name"  placeholder="Patient First Name">
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="last_name" name="last_name"  placeholder="Patient Last Name">
+                  </div>
+               </div>
+
+               <div class="col">
+                <div class="mb-3"> 
+                  <select id="inputState" class="form-select" name="ward_name">
+                    
+                        <option selected value="Nyerere">Nyerere  ward</option>
+                        <option value="Mandela">Mandela  ward</option>
+                        <option value="Mwinyi">Mwinyi  ward</option>
+                        <option value="Mkapa">Mkapa  ward</option>
+
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="Bed_number" name="bed_number" placeholder="Bed Number">
+                </div>
+             </div>
+
+             
+              </div>     
+              <div class="row">
+                <div class="col">
+                  <div class="mb-3"> 
+                    <label for="doctor_incharge" class="col-sm-2 col-form-label col-form-label-sm">Doctor Assigned</label>
+
+                    <select id="doctor_incharge" class="form-select" name="doctor_incharge">
+                          <option selected value="Dr John P">Dr. John P</option>
+                          <option value="Dr Issack M">Dr Issack M</option>
+                          <option value="Dr Marie C">Dr Marie C</option>
+                          <option value="Dr Ben C">Dr Ben C</option>
+  
+                    </select>
+                  </div>
+               </div>
+               <div class="col">
+                <div class="mb-3">
+                  <label for="patient_conditon" class="col-sm-2 col-form-label col-form-label-sm">Patient Condition</label>
+
+                  <select id="patient_conditon" class="form-select"  name="patient_conditon">
+                        <option selected value="Critical">Critical</option>
+                        <option value="Average">Average</option>
+                        <option value="Enhanced">Enhanced</option>
+                        <option value="Normal">Normal</option>
+
+                  </select>           
+                </div>
+               </div>
+  
+              </div>     
+               
+                
+                <button type="submit" class="btn btn-secondary">Admit Patient</button>
+              </form>
+         </div>
+         
+     </div>
+ </div>
+{% endblock %}

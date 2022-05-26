@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %} 
+      Health Status Monitor
+{% endblock %} 
+   
+{% block content %} 
+<div class="container">
+    <h1 class="Display-1 text-secondary">
+        Welcome To Patient Health Monitoring System
+    </h1>
+
+<div class="container">
+    <main>
+        <div class="container py-4">
+          <header class="pb-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+              <span class="fs-4 text-info">Patient Enrolled and Their Health Status</span>
+            </a>
+          </header>
+      
+          <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+              <h1 class="display-5 fw-bold text-secondary">Patient List</h1>
+              <p class="col-md-8 fs-4">Check the list of patients enrolled in hospital wards and their basic details. 
+                That is their names,wood and bed number and the health care giver that is assigned to that patient</p>
+               <!-- HOME BUTTONS FOR ALL THE SYSTEM-->
+                <a class="btn btn-primary btn-lg" type="button" href="/add-patient-form">Enroll patient</a>
+                <a class="btn btn-secondary btn-lg" type="button" href="/patient-enrolled">Go to the list</a>
+              <a class="btn btn-warning btn-lg" type="button" href="/patient-monitored">Under Monitor</a>
+              
+            </div>
+          </div>
+      <br>
+      <hr>
+          <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+              <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2 class="text-warning h2 ">Summary</h2>
+                <p>Please address these patient as soon as possible
+                 <div class="container">
+                  <ol class="list-group list-group-numbered">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                      <div class="ms-2 me-auto">
+                        <div class="fw-bold">Number of Ward</div>
+                      </div>
+                      <span class="badge bg-danger rounded-pill">4</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                      <div class="ms-2 me-auto">
+                        <div class="fw-bold">Admitted Patients </div>
+                      </div>
+                      <span class="badge bg-danger rounded-pill">{{patientNumber}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                      <div class="ms-2 me-auto">
+                        <div class="fw-bold">Active Sensors</div>
+                      </div>
+                      <span class="badge bg-danger rounded-pill">{{SensorNumber}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                      <div class="ms-2 me-auto">
+                        <div class="fw-bold">Critical Patients</div>
+                      </div>
+                      <span class="badge bg-danger rounded-pill">{{criticalNumber}}</span>
+                    </li>
+                  </ol>
+                 </div>
+                </p>
+                <button class="btn btn-outline-light" type="button">Need Help</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="h-100 p-5 bg-light border rounded-3">
+                <h2 class="h2 text-secondary">Quick Guide</h2>
+                <p>
+
+           This is section helps the health caregiver on the use of the system to ensure its reliability.Under this
+            section one may remind himself/herself on how to effectively use this system. To avoid any confusion it is  <b class="text-secondary">recommended</b> to revise section as often as possible
+                </p>
+                <a class="btn btn-outline-secondary" href="/guide">More</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+</div>
+
+{% endblock %} 

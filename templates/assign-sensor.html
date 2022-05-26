@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Form
+{% endblock%}
+
+{% block content %}
+ <div class="container">
+     <div class="row">
+        <h1></h1>
+         <div class="col">
+          
+             <div class="row">
+               <div class="col">
+                <h3 class="h3">
+                  Assign a Sensor Node To <small class="text text-primary"> {{patientName.first_name}} {{patientName.last_name}}</small>
+               </h3>
+                <form action="/update-patient-node" method="POST">
+
+           
+                  <div class="col">
+                   <div class="mb-3"> 
+
+                    <div class="container">
+                        <ol class="list-group list-group-numbered">
+        
+                         
+                        </ol>
+                       </div>
+                     <select id="inputState" class="form-select" name="node_number">
+
+                         
+                           {%for node in nodeAvailable %}
+                           <option selected value="{{node.id}}">
+                            
+
+                            
+                            {{node.id}}-{{node.bed_number}}-{{node.ward_name}}
+
+                            
+                        </option>        
+                             {% endfor%}
+                     </select>
+                   </div>
+                   <div class="mb-3">
+                     <input type="text " class="form-control" id="patient_id" name="patient_id" placeholder="Bed Number" value ="{{patientName.id}}" hidden >
+                   </div>
+                </div>
+   
+                
+                 </div>     
+                    
+                  
+                   
+                   <button type="submit" class="btn btn-secondary">Assign Node</button>
+                 </form>
+               </div>
+              
+             </div>
+            
+         </div>
+         
+     </div>
+ </div>
+{% endblock %}
