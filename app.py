@@ -14,7 +14,7 @@ app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///wardsys.db'
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://kiyjxcfsojujet:9ddc7c2f5ab88dbb0a764e34f1d54561020d36463e8985215fe6ec02a1ee05a9@ec2-52-204-195-41.compute-1.amazonaws.com:5432/d16vlocu92l8pg'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kiyjxcfsojujet:9ddc7c2f5ab88dbb0a764e34f1d54561020d36463e8985215fe6ec02a1ee05a9@ec2-52-204-195-41.compute-1.amazonaws.com:5432/d16vlocu92l8pg'
 #----------- MYSQL  CONNECTION
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/ward_patient'
