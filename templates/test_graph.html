@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %} 
+     Patient List
+{% endblock %} 
+   
+{% block content %} 
+    <h1 class="Display-1">
+        Graphs
+    </h1>
+    <div class="container">
+      <!-- <div class="card">
+        <div class="card-header">
+             Temperate and Heart Rate Graph
+        </div>
+        <div class="card-body">
+          <div class="graph">
+            <canvas id="lineChart"></canvas>
+
+            <script>
+              var ctx = document.getElementById("lineChart").getContext("2d");
+              var lineChart = new Chart(ctx,{
+                type: "line",
+                data: {
+                  labels: {{ labels | safe}},
+                  datasets: [
+                    {
+                      label: "Temperature",
+                      data: {{ temperatures | safe}},
+                      fill: true,
+                      borderColor: "rgb(100 192, 192)",
+                      lineTension: 0.5
+                    }
+                  ]
+                }
+                
+              });
+
+            </script>
+          </div>
+        </div>
+      </div> -->
+    <div class="card">
+      <div class="svg_image">
+        Lorem, ipsum dolor sit amet consectetur adipisic
+        ing elit. Fugiat adipisci animi sequi sunt hic eos corporis, eaque pos
+        simus eius illum, aperiam, dignissimos error
+         ipsa deserunt inventore molestiae culpa deleniti tempore?
+      </div>
+      <!-- <img src="" alt=""> -->
+      <img src="{{url_for('static', filename ='img/publicdomainq-medicine-doctor-and-nurse.svg')}}" alt="">
+    </div>
+    
+    </div>
+{% endblock %} 

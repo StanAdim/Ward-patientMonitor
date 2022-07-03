@@ -17,8 +17,8 @@
                  Introduction
                 </button>
               </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
+              <div id="collapseOne" class="row accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="col accordion-body">
                   <strong>What does This system DO</strong> 
                   <br>
                   The system is capable of enrolling admitted patient to the system and that allows immediate tracking 
@@ -27,6 +27,11 @@
                   to the hospital data polls. To view patient admited list click the link here: <a href="/patient-enrolled" class="bg bg-light"><code class="link-primary">Patient List</code></a>
                   The tracking system of sensor nodes save both the patient temperature and heart rates to the database of patient respectively.
                   <code>Report To Your supervise for any system misbehaviur</code>
+                  
+                </div>
+                <div class="col">
+                  <img src="{{url_for('static', filename ='img/man-guide.svg')}}" alt="" 
+                  class="img-thumbnail rounded float-end" style="width:200px;height:200px;">
                 </div>
               </div>
             </div>

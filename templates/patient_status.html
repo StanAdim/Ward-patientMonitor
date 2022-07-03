@@ -5,40 +5,149 @@
 {% endblock %} 
    
 {% block content %} 
-    <h1 class="Display-1">
+<div class="container text-center">
+    <h1 class="Display-1 ">
         Temperature and Heart rate Records
     </h1>
     <small class=" h4 text text-primary">{{patientInfo.first_name}} {{patientInfo.last_name}} Record</small>
+</div>
+    
 <div class="container">
-    <div class="row">
-        <table class="table table-striped">
+   <div class="row">
+    <div class="row mt-1">
+       <div class="container">
+        <div class="card">
+            <div class="card-header bg-dark text-info text-center">
+                Temperate and Heart Rate Table
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
            
-            <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Temperature <small class="text-secondary"> (C) </small></th>
-                  <th scope="col">Heart Rates <small class="text-secondary"> (BPM) </small></th>
-                 
-                </tr>
-              </thead>
-              <tbody>
-
-
-                
-                  {% for record in healthRecords %}
-                  <tr>
-                  <th scope="row">{{record.id}}</th>
-                  <td>{{record.temperature}}</td>
-                  <td>{{record.heart_rate}}</td>
-                 
-                <!-- <td>....</td>  --> 
-                </tr>
-                  {% endfor %}
-                                
-             
-               
-              </tbody>
-          </table>
+                    <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Temperature <small class="text-secondary"> (C) </small></th>
+                          <th scope="col">Heart Rates <small class="text-secondary"> (BPM) </small></th>
+                         
+                        </tr>
+                      </thead>
+                      <tbody>
+        
+        
+                        
+                          {% for record in healthRecords.items %}
+                          <tr>
+                          <th scope="row">{{record.time_created.strftime("%x || ")}}  <small class=" text-danger ">{{record.time_created.strftime("%X")}} </small> </th>
+                          <td>  <b>
+                            <small class="text-primary">{{record.temperature}}</small>
+                        </b></td>
+                          <td> 
+                            <b>
+                                <small class="text-primary">{{record.heart_rate}}</small>
+                            </b></td>                 
+                        <!-- <td>....</td>  --> 
+                        </tr>
+                          {% endfor %}
+                                        
+                     
+                       
+                      </tbody>
+                  </table>
+            </div>
+        </div>
+       </div>
+       <div class="container pagination mx-3">
+        <p class="text-secondary pt-2 p-2">
+            <b>Pages</b>
+        </p>
+        {% for page_num in healthRecords.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2 ) %}
+    {% if page_num %}
+            {% if healthRecords.page ==page_num %}
+            <a href="{{url_for('patientStatus',id = patientInfo.id ,page=page_num)}}" 
+            class="btn btn-primary mb-3 m-1">{{page_num}}</a>
+            {% else %} 
+            <a href="{{url_for('patientStatus',id = patientInfo.id,page=page_num)}}" 
+            class="btn btn-outline-info mb-3 m-1">{{page_num}}</a>
+            {% endif %}
+      {% else %}
+    ...
+    {% endif %}
+    {% endfor %}
     </div>
+    
+    </div>
+    <div class="col mt-1">
+        <div class="container row">
+            <div class="card col">
+              <div class="card-header bg-dark text-info text-center">
+                   Temperature Graph
+              </div>
+              <div class="card-body">
+                <div class="graph">
+                  <canvas id="lineChart1"></canvas>
+      
+                  <script>
+                    var ctx = document.getElementById("lineChart1").getContext("2d");
+                    var lineChart = new Chart(ctx,{
+                      type: "line",
+                      data: {
+                        labels: {{ labels | safe}},
+                        datasets: [
+                          {
+                            label: "Temperature",
+                            data: {{ temperatures | safe}},
+                            fill: true,
+                            backgroundColor: 'rgb(245, 212, 66)',
+                            borderColor: 'rgb(112, 8, 50)',
+                            borderWidth: 4,
+                            lineTension: 0.8
+                          }
+
+                        ]
+                      }
+                      
+                    });
+      
+                  </script>
+                </div>
+              </div>
+            </div>
+            <div class="card col">
+                <div class="card-header bg-dark text-info text-center">
+                    Heart Rate Graph
+                </div>
+                <div class="card-body">
+                  <div class="graph">
+                    <canvas id="lineChart2"></canvas>
+        
+                    <script>
+                      var ctx = document.getElementById("lineChart2").getContext("2d");
+                      var lineChart = new Chart(ctx,{
+                        type: "line",
+                        data: {
+                          labels: {{ labels | safe}},
+                          datasets: [
+                            {
+                              label: "Heart Rate",
+                              data: {{ heart_rate | safe}},
+                              fill: true,
+                              backgroundColor: 'rgb(179, 245, 66)',
+                              borderColor: 'rgb(15, 4, 89)',
+                              borderWidth: 4,
+                              lineTension: 0.8
+                            }
+                          ]
+                        }
+                        
+                      });
+        
+                    </script>
+                  </div>
+                </div>
+              </div>
+          </div>
+    </div>
+   </div>
+   
 </div>
 {% endblock %} 

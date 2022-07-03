@@ -14,21 +14,25 @@
     <main>
         <div class="container py-4">
           <header class="pb-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-              <span class="fs-4 text-info">Patient Enrolled and Their Health Status</span>
+            <a href="/" class="d-flex  align-items-center text-dark text-decoration-none">
+              <span class="fs-4 text-info ">Patient Enrolled and Their Health Status</span>
             </a>
           </header>
       
-          <div class="p-5 mb-4 bg-light rounded-3">
-            <div class="container-fluid py-5">
+          <div class="row p-5 mb-4 bg-light rounded-3">
+            <div class="col container-fluid py-5 ">
               <h1 class="display-5 fw-bold text-secondary">Patient List</h1>
               <p class="col-md-8 fs-4">Check the list of patients enrolled in hospital wards and their basic details. 
                 That is their names,wood and bed number and the health care giver that is assigned to that patient</p>
                <!-- HOME BUTTONS FOR ALL THE SYSTEM-->
-                <a class="btn btn-primary btn-lg" type="button" href="/add-patient-form">Enroll patient</a>
-                <a class="btn btn-secondary btn-lg" type="button" href="/patient-enrolled">Go to the list</a>
+                <a class="btn btn-primary btn-lg" type="button" href="/add-patient-form">Enroll Patient</a>
+                <a class="btn btn-secondary btn-lg" type="button" href="/patient-enrolled">Enrolled Patients</a>
               <a class="btn btn-warning btn-lg" type="button" href="/patient-monitored">Under Monitor</a>
               
+            </div>
+            <div class="col">
+              <img src="{{url_for('static', filename ='img/docandnurse.svg')}}" alt="docandnurse"
+               class="rounded mx-auto d-block img-fluid">
             </div>
           </div>
       <br>
@@ -70,8 +74,8 @@
                 <button class="btn btn-outline-light" type="button">Need Help</button>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="h-100 p-5 bg-light border rounded-3">
+            <div class="row col-md-6">
+              <div class="col h-100 p-5 bg-light border rounded-3">
                 <h2 class="h2 text-secondary">Quick Guide</h2>
                 <p>
 
@@ -79,6 +83,9 @@
             section one may remind himself/herself on how to effectively use this system. To avoid any confusion it is  <b class="text-secondary">recommended</b> to revise section as often as possible
                 </p>
                 <a class="btn btn-outline-secondary" href="/guide">More</a>
+              </div>
+              <div class="col">
+                <img src="{{url_for('static', filename ='img/Help.svg')}}" alt="help" class="img-fluid">
               </div>
             </div>
           </div>

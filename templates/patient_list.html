@@ -7,13 +7,13 @@
 {% block content %} 
     <h1 class="Display-1">
         Patient Enrolled
-        <small class="text-warning">  {{patientNumber}}</small>
+        <small class="text-warning">  {{patients.total}}</small>
     </h1>
 <div class="container">
 
 
     <div class="row">
-        {%if patientNumber != 0%}
+        {%if patients.total != 0%}
         <table class="table table-stripped">
            
             <thead>
@@ -30,7 +30,7 @@
               </thead>
               <tbody>
               
-               {% for patient in patients %}
+               {% for patient in patients.items %}
                <tr>
                 <td>{{patient.id}}</td>
                 <td>{{patient.last_name}} |  {{patient.first_name}}</td>
@@ -41,7 +41,7 @@
                     {% if patient.node_number != 0 %}
                     <b class="text-waring"></b>
                     <a href="/patient-status/{{patient.id}}" class="btn btn-success btn-sm">
-                        Node{{patient.node_number}} Records
+                        Node|{{patient.node_number}} Records
                     </a>
                 {% endif %}
 
@@ -90,9 +90,29 @@
                {% endfor %}
                
               </tbody>
+              
           </table>
-{%endif%}
-    
+         
+{%endif%}    
     </div>
+ <div class="pagination">
+    <p class="text-secondary pt-1 p-1">
+        <b>Pages</b>
+    </p>
+    {% for page_num in patients.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2 ) %}
+    {% if page_num %}
+            {% if patients.page ==page_num %}
+            <a href="{{url_for('patientEnrolled',page=page_num)}}" 
+            class="btn btn-primary mb-4 m-1">{{page_num}}</a>
+            {% else %} 
+            <a href="{{url_for('patientEnrolled',page=page_num)}}" 
+            class="btn btn-outline-info mb-4 m-1">{{page_num}}</a>
+            {% endif %}
+      {% else %}
+    ...
+    {% endif %}
+
+    {% endfor %}
+ </div>
 </div>
 {% endblock %} 

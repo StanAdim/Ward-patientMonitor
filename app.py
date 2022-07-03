@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kiyjxcfsojujet:9ddc7c2f5ab88dbb0a764e34f1d54561020d36463e8985215fe6ec02a1ee05a9@ec2-52-204-195-41.compute-1.amazonaws.com:5432/d16vlocu92l8pg'
 #----------- MYSQL  CONNECTION
 
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/ward_patient'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/ward_patient'
 
 
 ###################### ----DATABASE CONFIGURATIONS -----#################
@@ -47,7 +47,9 @@ class HealthRecord(db.Model):
         time_created = db.Column(db.DateTime, nullable = False , default =datetime.utcnow )
 
         def __repr__(self):
-            return f"HealthRecord('{self.temperature}', '{self.heart_rate}')"
+            return f"HealthRecord('{self.temperature}', '{self.heart_rate}', '{self.time_created}')"
+        def __getitem__(self,key):
+                return self.__dict__[key]
 class Sensor(db.Model): 
         id = db.Column(db.Integer, primary_key = True)
         ward_name = db.Column(db.String(60),nullable = False)
@@ -204,10 +206,12 @@ def register_node():
 def patientEnrolled():
 
         ##Querying patients list From DB
-        patients_list = Patient.query.all()
-        patientNumber = len(patients_list)
+        page = request.args.get('page', 1 , type=int) #passing page number 
 
-        return render_template('patient_list.html', patients = patients_list, patientNumber = patientNumber)
+        patients_list = Patient.query.order_by(Patient.patient_created.desc()).paginate(page=page, per_page=7)
+
+
+        return render_template('patient_list.html', patients = patients_list)
 
 #__________________________________________________________________________________
 #__________________________________________________________________________________
@@ -230,33 +234,68 @@ def patientStatus(id = id):
         patientInfo = Patient.query.filter(Patient.id == patientID).first()
         nodeNumber = patientInfo.node_number
         ##Querying patients-health records From DB
-        healthRecord = HealthRecord.query.filter(HealthRecord.sensor_Id == nodeNumber).all()
-        return render_template('patient_status.html', healthRecords = healthRecord ,patientInfo = patientInfo)
+        page = request.args.get('page', 1 , type=int) #passing page number 
+        healthRecord = HealthRecord.query.\
+                filter(HealthRecord.sensor_Id == nodeNumber ).\
+                        paginate(page=page, per_page=10)
+
+                        # For Table
+        data = HealthRecord.query.\
+                filter(HealthRecord.sensor_Id == nodeNumber).all()
+        labels = [row['id'] for row in data]
+        temperatures = [row["temperature"] for row in data]
+        heart_rate = [row["heart_rate"] for row in data]
+
+        return render_template('patient_status.html', healthRecords = healthRecord\
+                 ,patientInfo = patientInfo, labels = labels, temperatures = temperatures, heart_rate = heart_rate )
 #//////////////////////////////////////////////////////////////////////////////////////
 
 #-----------ACCEPTING SENSOR DATA VIA URL
 @app.route('/sensor/data/<int:sensorId>/<float:temperature>/<int:heart_rate>')
 def sensor_data(sensorId,temperature,heart_rate):
         sensorId = sensorId
-        temperature =temperature
-        heart_rate= heart_rate
-        #sensor id and sensor data to db
+# Validating sensor Data
+
+        if (temperature > 25 and temperature < 41.0 and heart_rate > 60 and heart_rate < 120):
+                temperatureNew = temperature
+                heart_rateNew = heart_rate
+                #sensor id and sensor data to db
                  #patients add to Model in database
-        new_sensor_data = HealthRecord(temperature = temperature, heart_rate = heart_rate , sensor_Id = sensorId)
+                new_sensor_data = HealthRecord(temperature = temperatureNew, heart_rate = heart_rateNew , sensor_Id = sensorId)
 
                 ##message = "New Sensor added"
                 ####-----sending and committing data to Database 
-        try:
-                db.session.add(new_sensor_data)
-                db.session.commit()
-                return "Sensor data added "
-        except:
-                return "No patient added to database, check your Details again"
+                try:
+                        db.session.add(new_sensor_data)
+                        db.session.commit()
+                        return "Sensor data added "
+                except:
+                        return "No data added to database, check your Details again"
+        else:
+                return "Invalid Sensor Values"
         
       
 
 #__________________________________________________________________________________
-#__________________________________________________________________________________
+#________________________________________________________
+# 
+@app.route('/graph')
+def testGraph():
+        nodeNumber = 1
+        data1 = [
+                []
+        ]
+        data = HealthRecord.query.\
+                filter(HealthRecord.sensor_Id == nodeNumber).all()
+        labels = [row['id'] for row in data]
+        temperatures = [row["temperature"] for row in data]
+        heart_rate = [row["heart_rate"] for row in data]
+        # values1 = [row[2] for row in data]
+
+        return render_template('test_graph.html', labels = labels, temperatures = temperatures , heart_rate = heart_rate)
+        # return labels
+#_
+# __________________________
 ####----- GUIDE ----#####
 @app.route('/guide')
 def systemGuider():
