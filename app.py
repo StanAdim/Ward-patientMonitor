@@ -256,7 +256,7 @@ def sensor_data(sensorId,temperature,heart_rate):
         sensorId = sensorId
 # Validating sensor Data
 
-        if (temperature > 25 and temperature < 41.0 and heart_rate > 60 and heart_rate < 120):
+        if (temperature > 20 and temperature < 41.0 and heart_rate > 60 and heart_rate < 120):
                 temperatureNew = temperature
                 heart_rateNew = heart_rate
                 #sensor id and sensor data to db
