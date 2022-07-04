@@ -148,6 +148,8 @@ def assign_sensorNode(id = id):
 def remove_sensorNode(id):
         patient_id = id
         removeSensorPatient = Patient.query.filter(Patient.id == patient_id).first()
+        removeSensorPatient.node_number = 0
+        #return removeSensorPatient.first_name
         try:
                 db.session.commit()
                 return redirect('/patient-enrolled')
