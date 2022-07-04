@@ -39,7 +39,6 @@
                 <td>{{patient.patient_conditon}}</td>
                 <td>
                     {% if patient.node_number != 0 %}
-                    <b class="text-waring"></b>
                     <a href="/patient-status/{{patient.id}}" class="btn btn-success btn-sm">
                         Node|{{patient.node_number}} Records
                     </a>
@@ -68,7 +67,7 @@
                                             <div class="modal-body">
                                            Removing  <span class="text text-primary">{{patient.first_name}} {{patient.last_name}}</span> from
                                             Sensor 
-                                            <span class="text text-primary">Node{{patient.node_number}}</span> Records
+                                            <span class="text text-primary">Node|{{patient.node_number}}</span> Records
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">No</button>

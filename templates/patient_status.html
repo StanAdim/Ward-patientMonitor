@@ -25,7 +25,7 @@
            
                     <thead>
                         <tr>
-                          <th scope="col">#</th>
+                          <th scope="col">MM/DD/YY   HH/MM/SS</th>
                           <th scope="col">Temperature <small class="text-secondary"> (C) </small></th>
                           <th scope="col">Heart Rates <small class="text-secondary"> (BPM) </small></th>
                          
@@ -37,7 +37,7 @@
                         
                           {% for record in healthRecords.items %}
                           <tr>
-                          <th scope="row">{{record.time_created.strftime("%x || ")}}  <small class=" text-danger ">{{record.time_created.strftime("%X")}} </small> </th>
+                          <th scope="row">{{record.time_created.strftime("%x | | ")}}  <small class=" text-danger ">{{record.time_created.strftime("%X")}} </small> </th>
                           <td>  <b>
                             <small class="text-primary">{{record.temperature}}</small>
                         </b></td>
